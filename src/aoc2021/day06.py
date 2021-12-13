@@ -5,11 +5,11 @@ from ._registry import register
 
 
 def estimate_population(fish: list[int], days: int) -> int:
-    fish_counts = dict.fromkeys(range(9), 0)
-    fish_counts.update(Counter(fish))
+    template = dict.fromkeys(range(9), 0)
+    fish_counts = template | Counter(fish)
 
     for day in range(days):
-        new_counts = dict.fromkeys(range(9), 0)
+        new_counts = template.copy()
         for timer, num in fish_counts.items():
             if timer == 0:
                 new_counts[6] += num
